@@ -2,14 +2,13 @@ package es.jmc.hexacart.service;
 
 import es.jmc.hexacart.controller.NewProductRequest;
 import es.jmc.hexacart.controller.ProductFullResponse;
-import es.jmc.hexacart.domain.port.ProductFull;
-import es.jmc.hexacart.domain.port.ProductLite;
-import es.jmc.hexacart.domain.port.ProductUseCase;
+import es.jmc.hexacart.domain.port.product.ProductFull;
+import es.jmc.hexacart.domain.port.product.ProductLite;
+import es.jmc.hexacart.domain.port.product.ProductUseCase;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Slf4j

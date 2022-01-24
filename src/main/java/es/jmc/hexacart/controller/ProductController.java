@@ -1,6 +1,5 @@
 package es.jmc.hexacart.controller;
 
-import es.jmc.hexacart.domain.port.ProductFull;
 import es.jmc.hexacart.service.ProductService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

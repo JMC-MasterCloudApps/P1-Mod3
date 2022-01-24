@@ -1,12 +1,12 @@
 package es.jmc.hexacart.domain.usecase;
 
-import es.jmc.hexacart.domain.port.ProductFull;
-import es.jmc.hexacart.domain.port.ProductLite;
-import es.jmc.hexacart.domain.port.ProductRepository;
-import es.jmc.hexacart.domain.port.ProductUseCase;
+import es.jmc.hexacart.domain.port.product.ProductFull;
+import es.jmc.hexacart.domain.port.product.ProductLite;
+import es.jmc.hexacart.domain.port.product.ProductRepository;
+import es.jmc.hexacart.domain.port.product.ProductUseCase;
 import java.util.List;
 
-public class ProductUseCaseImpl implements ProductUseCase {
+public class  ProductUseCaseImpl implements ProductUseCase {
 
   private final ProductRepository repository;
 

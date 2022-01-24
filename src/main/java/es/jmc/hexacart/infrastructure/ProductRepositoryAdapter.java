@@ -1,11 +1,11 @@
 package es.jmc.hexacart.infrastructure;
 
-import es.jmc.hexacart.domain.port.ProductFull;
-import es.jmc.hexacart.domain.port.ProductLite;
-import es.jmc.hexacart.domain.port.ProductRepository;
+import es.jmc.hexacart.domain.Product;
+import es.jmc.hexacart.domain.port.product.ProductFull;
+import es.jmc.hexacart.domain.port.product.ProductLite;
+import es.jmc.hexacart.domain.port.product.ProductRepository;
 import es.jmc.hexacart.infrastructure.model.ProductData;
 import es.jmc.hexacart.infrastructure.repository.ProductJpaRepository;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,7 +61,7 @@ public class ProductRepositoryAdapter implements ProductRepository {
     return product.map(ProductRepositoryAdapter::map).orElseThrow();
   }
 
-  private static ProductFull map(ProductData entity) {
+  static ProductFull map(ProductData entity) {
 
     log.info("ProductData ==> ProductFull");
 
@@ -72,7 +72,7 @@ public class ProductRepositoryAdapter implements ProductRepository {
         entity.getStock());
   }
 
-  private static ProductData map(ProductLite dto) {
+  static ProductData map(ProductLite dto) {
 
     log.info("ProductLite ==> ProductData");
 
