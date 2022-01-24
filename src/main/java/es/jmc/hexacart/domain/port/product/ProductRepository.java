@@ -1,4 +1,4 @@
-package es.jmc.hexacart.domain.port;
+package es.jmc.hexacart.domain.port.product;
 
 import java.util.List;
 

@@ -49,7 +49,7 @@ public class ProductService {
     return map(useCase.updateProductStock(id, quantity));
   }
 
-  private static ProductFullResponse map(ProductFull product) {
+  static ProductFullResponse map(ProductFull product) {
 
     log.info("ProductFull ==> ProductFullResponse");
 

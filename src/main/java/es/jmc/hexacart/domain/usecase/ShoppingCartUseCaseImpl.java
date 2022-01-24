@@ -25,6 +25,12 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
     return map(result);
   }
 
+  @Override
+  public ShoppingCartFull get(long id) {
+
+    return repository.findById(id);
+  }
+
   private ShoppingCartLite map(ShoppingCartFull dto) {
 
     return new ShoppingCartLite(

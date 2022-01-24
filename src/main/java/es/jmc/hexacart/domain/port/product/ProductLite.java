@@ -1,3 +1,8 @@
-package es.jmc.hexacart.domain.port;
+package es.jmc.hexacart.domain.port.product;
 
-public record ProductLite(String brand, String name, int stock) { }
+public record ProductLite
+    (
+        String brand,
+        String name,
+        int stock
+    ) { }

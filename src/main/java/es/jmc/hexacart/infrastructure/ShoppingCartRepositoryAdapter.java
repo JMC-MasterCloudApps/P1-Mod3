@@ -27,6 +27,13 @@ public class ShoppingCartRepositoryAdapter implements ShoppingCartRepository {
     return map(data);
   }
 
+  @Override
+  public ShoppingCartFull findById(long id) {
+    var data = jpa.findById(id);
+
+    return data.map(ShoppingCartRepositoryAdapter::map).orElseThrow();
+  }
+
   static ShoppingCartData map(ShoppingCartNew dto) {
 
     var result = new ShoppingCartData();
