@@ -5,4 +5,6 @@ public interface ShoppingCartUseCase {
   ShoppingCartLite create();
 
   ShoppingCartFull get(long id);
+
+  void delete(long id);
 }

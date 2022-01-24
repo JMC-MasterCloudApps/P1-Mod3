@@ -31,6 +31,11 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
     return repository.findById(id);
   }
 
+  @Override
+  public void delete(long id) {
+    repository.deleteById(id);
+  }
+
   private ShoppingCartLite map(ShoppingCartFull dto) {
 
     return new ShoppingCartLite(

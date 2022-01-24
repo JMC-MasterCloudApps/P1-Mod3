@@ -28,6 +28,11 @@ public class ShoppingCartService {
     return map(response);
   }
 
+  public void deleteShoppingCart(long id) {
+
+    useCase.delete(id);
+  }
+
   private static ShoppingCartLiteResponse map(ShoppingCartLite dto) {
 
     return new ShoppingCartLiteResponse(dto.id(), dto.status().name());

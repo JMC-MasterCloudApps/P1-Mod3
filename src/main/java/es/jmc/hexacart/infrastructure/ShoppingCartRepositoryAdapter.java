@@ -34,6 +34,11 @@ public class ShoppingCartRepositoryAdapter implements ShoppingCartRepository {
     return data.map(ShoppingCartRepositoryAdapter::map).orElseThrow();
   }
 
+  @Override
+  public void deleteById(long id) {
+    jpa.deleteById(id);
+  }
+
   static ShoppingCartData map(ShoppingCartNew dto) {
 
     var result = new ShoppingCartData();
