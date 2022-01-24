@@ -1,8 +1,7 @@
 package es.jmc.hexacart.controller;
 
 import es.jmc.hexacart.domain.port.ProductFull;
-import es.jmc.hexacart.domain.port.ProductLite;
-import es.jmc.hexacart.domain.port.ProductUseCase;
+import es.jmc.hexacart.service.ProductService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,18 +22,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ProductController {
 
-  private final ProductUseCase productUC;
+  private final ProductService service;
 
   @GetMapping()
-  public List<ProductFull> getProducts() {
+  public List<ProductFullResponse> getProducts() {
 
-    return productUC.getProducts();
+    return service.getProducts();
   }
 
   @GetMapping("{id}")
-  public ResponseEntity<ProductFull> getProducts(@PathVariable long id) {
+  public ResponseEntity<ProductFullResponse> getProduct(@PathVariable long id) {
 
-    var product = productUC.getProduct(id);
+    var product = service.getProduct(id);
 
     return ResponseEntity.ok(product);
   }
@@ -42,23 +41,23 @@ public class ProductController {
   @DeleteMapping("{id}")
   public ResponseEntity<Void> deleteProduct(@PathVariable long id) {
 
-    productUC.removeProduct(id);
+    service.deleteProduct(id);
 
     return ResponseEntity.ok().build();
   }
 
   @PostMapping()
-  public ResponseEntity<ProductFull> addProduct(@RequestBody ProductLite newProduct) {
+  public ResponseEntity<ProductFullResponse> addProduct(@RequestBody NewProductRequest newProduct) {
 
-    var result = productUC.addProduct(newProduct);
+    var result = service.addProduct(newProduct);
 
     return ResponseEntity.ok(result);
   }
 
   @PutMapping("/{id}/stock/{quantity}")
-  public ResponseEntity<ProductFull> updateStock(@PathVariable long id, @PathVariable int quantity) {
+  public ResponseEntity<ProductFullResponse> updateStock(@PathVariable long id, @PathVariable int quantity) {
 
-    var result = productUC.updateProductStock(id, quantity);
+    var result = service.updateProductStock(id, quantity);
 
     return ResponseEntity.ok(result);
   }
