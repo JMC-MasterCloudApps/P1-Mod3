@@ -7,10 +7,12 @@ import es.jmc.hexacart.domain.port.ProductLite;
 import es.jmc.hexacart.domain.port.ProductUseCase;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ProductService {
@@ -50,6 +52,8 @@ public class ProductService {
 
   private static ProductFullResponse map(ProductFull product) {
 
+    log.info("ProductFull ==> ProductFullResponse");
+
     return new ProductFullResponse(
         product.id(),
         product.brand(),
@@ -58,6 +62,8 @@ public class ProductService {
   }
 
   private static ProductLite map(NewProductRequest productRequest) {
+
+    log.info("NewProductRequest ==> ProductLite");
 
     return new ProductLite(
         productRequest.brand(),

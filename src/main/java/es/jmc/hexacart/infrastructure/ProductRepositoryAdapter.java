@@ -3,64 +3,85 @@ package es.jmc.hexacart.infrastructure;
 import es.jmc.hexacart.domain.port.ProductFull;
 import es.jmc.hexacart.domain.port.ProductLite;
 import es.jmc.hexacart.domain.port.ProductRepository;
+import es.jmc.hexacart.infrastructure.model.ProductData;
+import es.jmc.hexacart.infrastructure.repository.ProductJpaRepository;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ProductRepositoryAdapter implements ProductRepository {
 
-  List<ProductFull> products;
-
-  public ProductRepositoryAdapter() {
-    products = new ArrayList<>();
-    products.add(new ProductFull(1, "Apple", "Mac Book Pro", 234));
-    products.add(new ProductFull(2, "Xiaomi", "Redmi 9 BS", 23));
-    products.add(new ProductFull(3, "Samsung", "Galaxy S15", 54));
-  }
+  private final ProductJpaRepository jpa;
 
   @Override
   public List<ProductFull> findAll() {
-    // TODO
-    return products;
+    return jpa.findAll()
+        .stream()
+        .map(ProductRepositoryAdapter::map)
+        .toList();
   }
 
   @Override
   public ProductFull findById(long id) {
-    // TODO
-    return products.stream()
-        .filter(productFull -> productFull.id() == id)
-        .findAny()
+
+    return jpa.findById(id)
+        .map(ProductRepositoryAdapter::map)
         .orElseThrow(RuntimeException::new);
   }
 
   @Override
   public ProductFull save(ProductLite newProduct) {
 
-    // TODO
-    var productFull = new ProductFull(products.size() + 1, newProduct.brand(), newProduct.name(), newProduct.stock());
+    var data = jpa.save(map(newProduct));
 
-    products.add(productFull);
-    return productFull;
+    return map(data);
   }
 
   @Override
   public void remove(long id) {
-
-    // TODO
-    var product = findById(id);
-    products.remove(product);
+    jpa.deleteById(id);
   }
 
   @Override
   public ProductFull updateStockByProductId(long id, int stock) {
 
-    var product = findById(id);
-    var updatedProduct = new ProductFull(id, product.brand(), product.name(), stock);
+    var product = jpa.findById(id);
 
-    products.remove(product);
-    products.add(updatedProduct);
+    product.ifPresent(productData -> {
+      productData.setStock(stock);
+      jpa.save(productData);
+    });
 
-    return updatedProduct;
+    return product.map(ProductRepositoryAdapter::map).orElseThrow();
   }
+
+  private static ProductFull map(ProductData entity) {
+
+    log.info("ProductData ==> ProductFull");
+
+    return new ProductFull(
+        entity.getId(),
+        entity.getBrand(),
+        entity.getName(),
+        entity.getStock());
+  }
+
+  private static ProductData map(ProductLite dto) {
+
+    log.info("ProductLite ==> ProductData");
+
+    var data = new ProductData();
+    data.setBrand(dto.brand());
+    data.setName(dto.name());
+    data.setStock(dto.stock());
+
+    return data;
+  }
+
 }

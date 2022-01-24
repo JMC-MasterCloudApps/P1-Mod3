@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfiguration  {
 
   @Bean
-  public ProductUseCase productUseCase() {
-    return new ProductUseCaseImpl(new ProductRepositoryAdapter());
+  public ProductUseCase productUseCase(ProductRepositoryAdapter adapter) {
+    return new ProductUseCaseImpl(adapter);
   }
 
 }
