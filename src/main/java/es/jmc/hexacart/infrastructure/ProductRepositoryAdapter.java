@@ -84,4 +84,12 @@ public class ProductRepositoryAdapter implements ProductRepository {
     return data;
   }
 
+  static ProductData map(ProductFull dto) {
+
+    return new ProductData(
+        dto.id(),
+        dto.brand(),
+        dto.name(),
+        dto.stock());
+  }
 }

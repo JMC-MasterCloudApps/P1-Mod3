@@ -28,6 +28,14 @@ public class ShoppingCartRepositoryAdapter implements ShoppingCartRepository {
   }
 
   @Override
+  public ShoppingCartFull save(ShoppingCartFull shoppingCart) {
+
+    var data = map(shoppingCart);
+    data = jpa.save(data);
+    return map(data);
+  }
+
+  @Override
   public ShoppingCartFull findById(long id) {
     var data = jpa.findById(id);
 
@@ -63,5 +71,17 @@ public class ShoppingCartRepositoryAdapter implements ShoppingCartRepository {
         data.getId(),
         data.getStatus(),
         productsFull);
+  }
+
+  static ShoppingCartData map(ShoppingCartFull dto) {
+
+    var products = dto.products().stream()
+        .map(ProductRepositoryAdapter::map)
+        .collect(toSet());
+
+    return new ShoppingCartData(
+        dto.id(),
+        dto.status(),
+        products);
   }
 }

@@ -53,11 +53,12 @@ public class ShoppingCartController {
   @PatchMapping(ID)
   public ResponseEntity completeShoppingCart(@PathVariable long id) {
 
-    // TODO
+    service.completeShoppingCart(id);
 
-    return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    return ResponseEntity.ok().build();
   }
 
+  // TODO
   @PostMapping(NUM_OF_PRODUCT_CART_PATH)
   public ResponseEntity addProductToShoppingCart(
       @PathVariable long id,
@@ -69,6 +70,7 @@ public class ShoppingCartController {
     return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
   }
 
+  // TODO
   @DeleteMapping(PRODUCT_CART_PATH)
   public ResponseEntity removeProductFromShoppingCart(
       @PathVariable long id,

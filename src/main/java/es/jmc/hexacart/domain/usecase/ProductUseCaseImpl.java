@@ -1,5 +1,6 @@
 package es.jmc.hexacart.domain.usecase;
 
+import es.jmc.hexacart.domain.Product;
 import es.jmc.hexacart.domain.port.product.ProductFull;
 import es.jmc.hexacart.domain.port.product.ProductLite;
 import es.jmc.hexacart.domain.port.product.ProductRepository;
@@ -38,4 +39,14 @@ public class  ProductUseCaseImpl implements ProductUseCase {
   public ProductFull updateProductStock(long id, int stock) {
     return repository.updateStockByProductId(id, stock);
   }
+
+  static ProductFull map(Product model) {
+
+    return new ProductFull(
+        model.getId(),
+        model.getBrand(),
+        model.getName(),
+        model.getStock());
+  }
+
 }

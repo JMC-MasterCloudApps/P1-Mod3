@@ -7,4 +7,6 @@ public interface ShoppingCartUseCase {
   ShoppingCartFull get(long id);
 
   void delete(long id);
+
+  void complete(long id);
 }
