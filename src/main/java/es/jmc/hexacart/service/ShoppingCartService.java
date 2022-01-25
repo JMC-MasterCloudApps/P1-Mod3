@@ -38,6 +38,11 @@ public class ShoppingCartService {
     useCase.complete(id);
   }
 
+  public ShoppingCartFullResponse addProductToShoppingCart(long id, long productId, int quantity) {
+
+    return map(useCase.addProduct(id, productId, quantity));
+  }
+
   private static ShoppingCartLiteResponse map(ShoppingCartLite dto) {
 
     return new ShoppingCartLiteResponse(dto.id(), dto.status().name());
@@ -45,8 +50,8 @@ public class ShoppingCartService {
 
   private static ShoppingCartFullResponse map(ShoppingCartFull dto) {
 
-    var products = dto.products().stream()
-        .map(ProductService::map)
+    var products = dto.products().entrySet().stream()
+        .map(entry -> ProductService.map(entry.getKey()))
         .collect(toSet());
 
     return new ShoppingCartFullResponse(

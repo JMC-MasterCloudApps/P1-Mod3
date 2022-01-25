@@ -10,6 +10,8 @@ public interface ProductRepository {
 
   ProductFull save(ProductLite newProduct);
 
+  ProductFull update(ProductFull product);
+
   void remove(long id);
 
   ProductFull updateStockByProductId(long id, int stock);

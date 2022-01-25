@@ -1,11 +1,10 @@
 package es.jmc.hexacart.domain.port.shoppingcart;
 
 import es.jmc.hexacart.domain.ShoppingCart;
-import es.jmc.hexacart.domain.port.product.ProductLite;
-import java.util.Set;
+import java.util.Map;
 
 public record ShoppingCartNew
     (
         ShoppingCart.CartStatus status,
-        Set<ProductLite> products
+        Map<Long, Integer> products
     ) { }

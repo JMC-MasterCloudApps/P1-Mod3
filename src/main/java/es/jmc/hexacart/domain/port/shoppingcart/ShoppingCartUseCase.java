@@ -9,4 +9,6 @@ public interface ShoppingCartUseCase {
   void delete(long id);
 
   void complete(long id);
+
+  ShoppingCartFull addProduct(long id, long productId, int quantity);
 }

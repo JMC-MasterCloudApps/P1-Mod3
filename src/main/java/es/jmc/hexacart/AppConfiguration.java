@@ -18,8 +18,9 @@ public class AppConfiguration  {
   }
 
   @Bean
-  public ShoppingCartUseCase shoppingCartUseCase(ShoppingCartRepositoryAdapter adapter) {
-    return new ShoppingCartUseCaseImpl(adapter);
+  public ShoppingCartUseCase shoppingCartUseCase(ShoppingCartRepositoryAdapter adapter,
+                                                 ProductRepositoryAdapter productAdapter) {
+    return new ShoppingCartUseCaseImpl(adapter, productAdapter);
   }
 
 }

@@ -58,14 +58,15 @@ public class ShoppingCartController {
     return ResponseEntity.ok().build();
   }
 
-  // TODO
+
   @PostMapping(NUM_OF_PRODUCT_CART_PATH)
-  public ResponseEntity addProductToShoppingCart(
+  public ResponseEntity<ShoppingCartFullResponse> addProductToShoppingCart(
       @PathVariable long id,
       @PathVariable(PROD_ID) long productId,
       @PathVariable(NUM_OF_PROD) int quantity) {
 
     // TODO
+    ShoppingCartFullResponse result = service.addProductToShoppingCart(id, productId, quantity);
 
     return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
   }

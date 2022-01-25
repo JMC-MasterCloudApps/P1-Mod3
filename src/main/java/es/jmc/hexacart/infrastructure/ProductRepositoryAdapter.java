@@ -44,6 +44,14 @@ public class ProductRepositoryAdapter implements ProductRepository {
   }
 
   @Override
+  public ProductFull update(ProductFull product) {
+
+    var data = jpa.save(map(product));
+
+    return map(data);
+  }
+
+  @Override
   public void remove(long id) {
     jpa.deleteById(id);
   }
