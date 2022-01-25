@@ -65,10 +65,9 @@ public class ShoppingCartController {
       @PathVariable(PROD_ID) long productId,
       @PathVariable(NUM_OF_PROD) int quantity) {
 
-    // TODO
     ShoppingCartFullResponse result = service.addProductToShoppingCart(id, productId, quantity);
 
-    return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    return ResponseEntity.ok(result);
   }
 
   // TODO
