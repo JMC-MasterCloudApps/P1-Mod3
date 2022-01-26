@@ -44,6 +44,12 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
 
   @Override
   public void delete(long id) {
+
+    var shoppingCart = toModel(repository.findById(id));
+    if (!shoppingCart.isComplete()) {
+      restoreStocks(shoppingCart);
+    }
+
     repository.deleteById(id);
   }
 
@@ -84,6 +90,10 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
   @Override
   public void removeProduct(long id, long productId) {
     var shoppingCart = toModel(repository.findById(id));
+    if (shoppingCart.isComplete()) {
+      throw new RuntimeException("Shopping cart already completed!");
+    }
+
     var product = new Product(productRepository.findById(productId));
 
     int amountRemoved = shoppingCart.removeProduct(product);
@@ -91,6 +101,14 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
 
     product.addStock(amountRemoved);
     productRepository.update(ProductUseCaseImpl.map(product));
+  }
+
+  private void restoreStocks(ShoppingCart shoppingCart) {
+
+    shoppingCart.getQuantityByProduct().forEach((key, value) -> {
+      key.addStock(value);
+      productRepository.update(ProductUseCaseImpl.map(key));
+    });
   }
 
   private int calculateNewStock(ShoppingCart shoppingCart,
