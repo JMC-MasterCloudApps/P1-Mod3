@@ -2,7 +2,6 @@ package es.jmc.hexacart.domain.usecase;
 
 import static es.jmc.hexacart.domain.ShoppingCart.CartStatus.defaultValue;
 import static java.util.Collections.emptyMap;
-import static java.util.stream.Collectors.toSet;
 
 import es.jmc.hexacart.domain.Product;
 import es.jmc.hexacart.domain.ShoppingCart;
@@ -13,14 +12,11 @@ import es.jmc.hexacart.domain.port.shoppingcart.ShoppingCartLite;
 import es.jmc.hexacart.domain.port.shoppingcart.ShoppingCartNew;
 import es.jmc.hexacart.domain.port.shoppingcart.ShoppingCartRepository;
 import es.jmc.hexacart.domain.port.shoppingcart.ShoppingCartUseCase;
-import es.jmc.hexacart.infrastructure.ProductRepositoryAdapter;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
 

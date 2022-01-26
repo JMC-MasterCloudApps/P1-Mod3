@@ -1,8 +1,6 @@
 package es.jmc.hexacart.infrastructure;
 
-import static java.util.Collections.emptyMap;
 import static java.util.stream.Collectors.toMap;
-import static java.util.stream.Collectors.toSet;
 
 import es.jmc.hexacart.domain.port.product.ProductRepository;
 import es.jmc.hexacart.domain.port.shoppingcart.ShoppingCartFull;
@@ -11,7 +9,6 @@ import es.jmc.hexacart.domain.port.shoppingcart.ShoppingCartRepository;
 import es.jmc.hexacart.infrastructure.model.ShoppingCartData;
 import es.jmc.hexacart.infrastructure.repository.ShoppingCartJpaRepository;
 import java.util.Map;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,5 @@
 package es.jmc.hexacart.infrastructure;
 
-import es.jmc.hexacart.domain.Product;
 import es.jmc.hexacart.domain.port.product.ProductFull;
 import es.jmc.hexacart.domain.port.product.ProductLite;
 import es.jmc.hexacart.domain.port.product.ProductRepository;
@@ -8,11 +7,9 @@ import es.jmc.hexacart.infrastructure.model.ProductData;
 import es.jmc.hexacart.infrastructure.repository.ProductJpaRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ProductRepositoryAdapter implements ProductRepository {

@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ProductController {
 
+  private static final String ID = "{id}";
+  private static final String UPDATE_STOCK_PATH = "/" + ID + "/stock/{quantity}";
+
   private final ProductService service;
 
   @GetMapping()
@@ -29,7 +32,7 @@ public class ProductController {
     return service.getProducts();
   }
 
-  @GetMapping("{id}")
+  @GetMapping(ID)
   public ResponseEntity<ProductFullResponse> getProduct(@PathVariable long id) {
 
     var product = service.getProduct(id);
@@ -37,7 +40,7 @@ public class ProductController {
     return ResponseEntity.ok(product);
   }
 
-  @DeleteMapping("{id}")
+  @DeleteMapping(ID)
   public ResponseEntity<Void> deleteProduct(@PathVariable long id) {
 
     service.deleteProduct(id);
@@ -53,7 +56,7 @@ public class ProductController {
     return ResponseEntity.ok(result);
   }
 
-  @PutMapping("/{id}/stock/{quantity}")
+  @PutMapping(UPDATE_STOCK_PATH)
   public ResponseEntity<ProductFullResponse> updateStock(@PathVariable long id, @PathVariable int quantity) {
 
     var result = service.updateProductStock(id, quantity);
