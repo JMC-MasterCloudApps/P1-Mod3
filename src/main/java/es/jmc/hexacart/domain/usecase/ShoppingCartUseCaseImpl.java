@@ -60,8 +60,13 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
   @Override
   public ShoppingCartFull addProduct(long id, long productId, int quantity) {
 
-    var productFull = productRepository.findById(productId);
     var shoppingCart = toModel(repository.findById(id));
+    if (shoppingCart.isComplete()) {
+      throw new RuntimeException("Shopping cart already completed!");
+    }
+
+    var productFull = productRepository.findById(productId);
+
 
     int newStock = calculateNewStock(shoppingCart, productFull, quantity);
 

@@ -71,8 +71,6 @@ public class ProductRepositoryAdapter implements ProductRepository {
 
   static ProductFull map(ProductData entity) {
 
-    log.info("ProductData ==> ProductFull");
-
     return new ProductFull(
         entity.getId(),
         entity.getBrand(),
@@ -81,8 +79,6 @@ public class ProductRepositoryAdapter implements ProductRepository {
   }
 
   static ProductData map(ProductLite dto) {
-
-    log.info("ProductLite ==> ProductData");
 
     var data = new ProductData();
     data.setBrand(dto.brand());

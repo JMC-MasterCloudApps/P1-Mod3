@@ -51,8 +51,6 @@ public class ProductService {
 
   static ProductFullResponse map(ProductFull product) {
 
-    log.info("ProductFull ==> ProductFullResponse");
-
     return new ProductFullResponse(
         product.id(),
         product.brand(),
@@ -61,8 +59,6 @@ public class ProductService {
   }
 
   private static ProductLite map(NewProductRequest productRequest) {
-
-    log.info("NewProductRequest ==> ProductLite");
 
     return new ProductLite(
         productRequest.brand(),

@@ -35,6 +35,10 @@ public class ShoppingCart {
     status = COMPLETE;
   }
 
+  public boolean isComplete() {
+    return COMPLETE.equals(status);
+  }
+
   public int getQuantity(long productId) {
 
     return quantityByProduct.entrySet().stream()
