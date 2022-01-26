@@ -7,7 +7,6 @@ import es.jmc.hexacart.controller.ShoppingCartLiteResponse;
 import es.jmc.hexacart.domain.port.shoppingcart.ShoppingCartFull;
 import es.jmc.hexacart.domain.port.shoppingcart.ShoppingCartLite;
 import es.jmc.hexacart.domain.port.shoppingcart.ShoppingCartUseCase;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +42,11 @@ public class ShoppingCartService {
     return map(useCase.addProduct(id, productId, quantity));
   }
 
+  public void removeProductFromShoppingCart(long id, long productId) {
+
+    useCase.removeProduct(id, productId);
+  }
+
   private static ShoppingCartLiteResponse map(ShoppingCartLite dto) {
 
     return new ShoppingCartLiteResponse(dto.id(), dto.status().name());
@@ -50,8 +54,8 @@ public class ShoppingCartService {
 
   private static ShoppingCartFullResponse map(ShoppingCartFull dto) {
 
-    var products = dto.products().entrySet().stream()
-        .map(entry -> ProductService.map(entry.getKey()))
+    var products = dto.products().keySet().stream()
+        .map(ProductService::map)
         .collect(toSet());
 
     return new ShoppingCartFullResponse(

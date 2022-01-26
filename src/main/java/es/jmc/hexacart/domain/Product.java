@@ -19,4 +19,8 @@ public class Product {
     name = dto.name();
     stock = dto.stock();
   }
+
+  public void addStock(int amount) {
+    stock += amount;
+  }
 }

@@ -1,14 +1,11 @@
 package es.jmc.hexacart.domain;
 
 import static es.jmc.hexacart.domain.ShoppingCart.CartStatus.COMPLETE;
-import static java.util.stream.Collectors.toSet;
+import static java.util.Optional.ofNullable;
 
-import es.jmc.hexacart.domain.port.shoppingcart.ShoppingCartFull;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -40,12 +37,30 @@ public class ShoppingCart {
 
   public int getQuantity(long productId) {
 
-    // TODO
-    return 0;
+    return quantityByProduct.entrySet().stream()
+        .filter(product -> product.getKey().getId() == productId)
+        .findAny()
+        .map(Map.Entry::getValue)
+        .orElse(0);
   }
 
   public void addProduct(Product product, int quantity) {
 
-    quantityByProduct.put(product, quantity);
+    var productMatch = quantityByProduct.keySet().stream()
+        .filter(item -> item.getId() == product.getId())
+        .findAny();
+
+    quantityByProduct.put(productMatch.orElse(product), quantity);
+  }
+
+  public Integer removeProduct(Product product) {
+
+    var match = quantityByProduct.entrySet().stream()
+        .filter(entry -> entry.getKey().getId() == product.getId())
+        .findAny();
+
+    match.map(Map.Entry::getKey).ifPresent(quantityByProduct::remove);
+
+    return match.map(Map.Entry::getValue).orElse(0);
   }
 }

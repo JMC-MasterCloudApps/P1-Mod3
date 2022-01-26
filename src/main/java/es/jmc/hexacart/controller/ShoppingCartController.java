@@ -1,7 +1,5 @@
 package es.jmc.hexacart.controller;
 
-import static java.lang.String.format;
-
 import es.jmc.hexacart.service.ShoppingCartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +41,7 @@ public class ShoppingCartController {
   }
 
   @DeleteMapping(ID)
-  public ResponseEntity deleteShoppingCart(@PathVariable long id) {
+  public ResponseEntity<Void> deleteShoppingCart(@PathVariable long id) {
 
     service.deleteShoppingCart(id);
 
@@ -51,7 +49,7 @@ public class ShoppingCartController {
   }
 
   @PatchMapping(ID)
-  public ResponseEntity completeShoppingCart(@PathVariable long id) {
+  public ResponseEntity<Void> completeShoppingCart(@PathVariable long id) {
 
     service.completeShoppingCart(id);
 
@@ -70,15 +68,14 @@ public class ShoppingCartController {
     return ResponseEntity.ok(result);
   }
 
-  // TODO
   @DeleteMapping(PRODUCT_CART_PATH)
-  public ResponseEntity removeProductFromShoppingCart(
+  public ResponseEntity<Void> removeProductFromShoppingCart(
       @PathVariable long id,
       @PathVariable(PROD_ID) long productId) {
 
-    // TODO
+    service.removeProductFromShoppingCart(id, productId);
 
-    return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    return ResponseEntity.ok().build();
   }
 
 
